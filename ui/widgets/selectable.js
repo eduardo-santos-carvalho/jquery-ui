@@ -65,18 +65,18 @@ return $.widget( "ui.selectable", $.ui.mouse, {
 			that._addClass( that.selectees, "ui-selectee" );
 			that.selectees.each( function() {
 				var $this = $( this ),
-					selecteeOffset = $this.offset(),
+					dimensions = $this[0].getBoundingClientRect(),
 					pos = {
-						left: selecteeOffset.left - that.elementPos.left,
-						top: selecteeOffset.top - that.elementPos.top
+						left: dimensions.left - that.elementPos.left,
+						top: dimensions.top - that.elementPos.top
 					};
 				$.data( this, "selectable-item", {
 					element: this,
 					$element: $this,
 					left: pos.left,
 					top: pos.top,
-					right: pos.left + $this.outerWidth(),
-					bottom: pos.top + $this.outerHeight(),
+					right: dimensions.right,
+					bottom: dimensions.bottom,
 					startselected: false,
 					selected: $this.hasClass( "ui-selected" ),
 					selecting: $this.hasClass( "ui-selecting" ),
